@@ -1,0 +1,97 @@
+
+body {
+  background: var(--background);
+  font-family: var(--ff-primary);
+  height: 100dvh;
+  padding: 1em;
+  display: grid;
+  place-items: center;
+}
+
+main {
+  background-color: var(--foreground);
+  color: var(--background);
+  border-radius: 0.3em;
+  min-width: 70dvw;
+  min-height: 80dvh;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5em;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 700px;
+}
+
+button {
+  font-family: var(--ff-secondary);
+}
+
+.btn {
+  padding: 0.5em 1em;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  border-radius: 5px;
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+  cursor: pointer;
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: var(--background) 2px solid;
+      left: 6px;
+      top: 6px;
+      border-radius: inherit;
+    }
+}
+
+.btn-primary {
+  color: var(--foreground);
+  background: var(--background);
+  min-height: 40px;
+  transition: 0.3s;
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.2;
+        &::after {
+          content: none
+        }
+    }
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.align-self {
+  align-self: center;
+}
+
+.gap1 {
+  gap: 1em;
+}
+
+@media screen and (width > 690px) {
+  main {
+    padding: 2em;
+  }
+
+  .btn-primary {
+    min-height: 55px;
+    font-size: 0.95rem;
+  }
+
+}

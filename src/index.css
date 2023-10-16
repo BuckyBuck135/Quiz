@@ -1,0 +1,41 @@
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+:root {
+  --clr-light: #fff8dc;
+  --clr-dark: #0B2434;
+  --clr-primary: #dbffa2;
+  --clr-secondary: #D6DBF5;
+  --clr-accent: #f79595;
+
+  --foreground: var(--clr-dark);
+  --background: var(--clr-light);
+
+  --ff-primary: 'Karla', sans-serif;;
+  --ff-secondary: 'Inter Tight', sans-serif
+}
+
+/* not implemented yet */
+.darkmode {
+  --clr-light: #fff8dc;
+  --clr-dark: #0B2434;
+  --clr-primary: #202302;
+  --clr-secondary: #00100d;
+  --clr-accent: #f79595;
+
+  --foreground: var(--clr-light);
+  --background: var(--clr-dark);
+}
+
+/* Overriding the user agent styles with our own */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground: var(--clr-light);
+    --background: var(--clr-dark);
+  }
+}
