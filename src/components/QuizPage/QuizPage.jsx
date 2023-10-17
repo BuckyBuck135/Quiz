@@ -5,38 +5,11 @@ import { decode } from "he"
 import Confetti from 'react-confetti'
 import { v4 as uuidv4 } from 'uuid'
 
-export default function QuizPage(props) {
-  const [apiData, setApiData] = useState([])
+export default function QuizPage( {apiData, handleChange} ) {
   const [selectedAnswers, setSelectedAnswers] = useState([])
   const [finalAnswersArray, setFinalAnswersArray] = useState([])
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [areAnswersComplete, setAreAnswersComplete] = useState(false)
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("https://opentdb.com/api.php?amount=2&category=21&difficulty=easy");
-        if (!response.ok) {
-          throw new Error('Could not reach the API')
-        }
-  
-        const data = await response.json()
-        const shuffledData = data.results.map(question => {
-          const shuffledAnswers = [question.correct_answer, ...question.incorrect_answers].sort(() => 0.5 - Math.random())
-          return {
-            ...question,
-            answers: shuffledAnswers
-          }
-        })
-        setApiData(shuffledData)
-      } catch (error) {
-        console.error('An error occurred while processing data:', error)
-      }
-    };
-  
-    fetchData();
-  }, [])
-  
 
   // Initialize the selectedAnswers array with null values for each question
   useEffect(() => {
@@ -140,7 +113,7 @@ export default function QuizPage(props) {
           {answerElements}
           <div className="flex gap1">
             <p>{endMessage}</p>
-            <button className="btn btn-primary align-self" onClick={props.handleChange}>NEW GAME</button>
+            <button className="btn btn-primary align-self" onClick={handleChange}>NEW GAME</button>
           </div>
         </section>
       ) : (
