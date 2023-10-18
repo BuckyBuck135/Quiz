@@ -6,9 +6,15 @@ import QuizPage from './components/QuizPage/QuizPage'
 import "./App.css"
 
 export default function App() {
-  const [apiData, setApiData] = useState([])
-  const [categoryData, setCategoryData] = useState([])
-  const [startScreen, setStartScreen] = useState(true)
+  const [apiData, setApiData] = useState([]) // Stores API data
+  const [startScreen, setStartScreen] = useState(true) // Conditionally renders the startPage
+  const [categoriesList, setCategoriesList] = useState([]) // Stores the list of trivia categories
+  const [formData, setFormData] = useState({
+    category: "",
+    difficulty: "easy",
+    amount: "5"
+  }) // Stores user preferences
+
 
   // fetches the list of categories from the API, which is sent to startPage 
   useEffect(() => {
@@ -19,7 +25,7 @@ export default function App() {
           throw new Error("Could not reach the API")
         }
         const data = await response.json()
-        setCategoryData(data.trivia_categories)
+        setCategoriesList(data.trivia_categories)
       }
 
       catch (error) {
@@ -33,7 +39,11 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://opentdb.com/api.php?amount=2&category=21&difficulty=easy");
+        let url = `https://opentdb.com/api.php?amount=${formData.amount}&difficulty=${formData.difficulty}`
+        if (formData.category !== "") {
+          url += `&category=${formData.category}`
+        }
+        const response = await fetch(url);
         if (!response.ok) {
           throw new Error('Could not reach the API')
         }
@@ -41,6 +51,7 @@ export default function App() {
         const data = await response.json()
         const shuffledData = data.results.map(question => {
           const shuffledAnswers = [question.correct_answer, ...question.incorrect_answers].sort(() => 0.5 - Math.random())
+          // we keep the api data with spread, and add the shuffled answers
           return {
             ...question,
             answers: shuffledAnswers
@@ -53,7 +64,13 @@ export default function App() {
     }
   
     fetchData()
-  }, [])
+  }, [formData])
+
+    // Callback function to manage StartPage's form and update state
+    function handleFormDataChange(newData) {
+      console.log(newData)
+      setFormData(newData)
+    }
 
   return (
     <main>    
@@ -61,13 +78,15 @@ export default function App() {
       {startScreen ?
         <StartPage 
           apiData={apiData}
-          categoryData={categoryData}
-          handleChange={()=> setStartScreen(prev => !prev)}  
+          categoriesList={categoriesList}
+          handleStart={()=> setStartScreen(prev => !prev)}  
+          formData={formData}
+          handleFormDataChange={handleFormDataChange}
         />
       :
         <QuizPage
           apiData={apiData}
-          handleChange={()=> setStartScreen(prev => !prev)}
+          handleStart={()=> setStartScreen(prev => !prev)}
         />
       }
     </main>

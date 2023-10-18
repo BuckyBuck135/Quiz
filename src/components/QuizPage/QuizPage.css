@@ -32,15 +32,16 @@ ul {
 }
 
 .isSelected {
-    background-color:#D6DBF5;
-    color:var(--background);
-    outline:1px solid var(--background);
+    background-color:var(--bg-neutral);
+    color: var(--clr-dark);
+    outline: 2px solid var(--bg-neutral);
+    outline-offset: 2px;
 }
 
 .isCorrectGuess {
-    background-color:#D6DBF5;
-    color:var(--background);
-    outline: 3px solid #176f2a;
+    background-color:var(--bg-neutral);
+    color:var(--clr-dark);
+        outline: 3px solid #176f2a;
     animation: scale 0.5s ease-in-out;
         &::before {
             content: "✓";
@@ -52,8 +53,8 @@ ul {
 }
 
 .isIncorrectGuess {
-    background-color:#D6DBF5;
-    color:var(--background);
+    background-color:var(--bg-neutral);
+    color:var(--clr-dark);
     outline: 3px solid #d03a1b;
     animation: horizontal-shaking 0.3s ease-in-out;
         &::before {
@@ -67,8 +68,8 @@ ul {
 }
 
 .isCorrectAnswer{
-    background-color: #D6DBF5;
-    color: var(--background);
+    background-color: var(--bg-neutral);
+    color:var(--clr-dark);
     outline: 3px solid #176f2a;
     &::before {
         content: "✓";

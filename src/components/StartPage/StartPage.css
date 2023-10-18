@@ -2,3 +2,23 @@ h1 {
     font-family: var(--ff-secondary);
     font-size: 2rem;
 }
+
+form > *:not(:last-child) {
+    margin-bottom: 1.5em;
+}
+
+label {
+    margin-right: 0.25em;
+}
+
+legend {
+    color: var(--foreground);
+    background: var(--background);
+    padding: 0.2em 0.4em;
+    border-radius: 0.3em;
+    opacity: 0.8
+}
+
+select {
+    padding: 0.2em 0.4em;
+}

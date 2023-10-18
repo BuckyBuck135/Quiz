@@ -5,24 +5,24 @@ import { decode } from "he"
 import Confetti from 'react-confetti'
 import { v4 as uuidv4 } from 'uuid'
 
-export default function QuizPage( {apiData, handleChange} ) {
-  const [selectedAnswers, setSelectedAnswers] = useState([])
-  const [finalAnswersArray, setFinalAnswersArray] = useState([])
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [areAnswersComplete, setAreAnswersComplete] = useState(false)
+export default function QuizPage( {apiData, handleStart} ) {
+  const [selectedAnswers, setSelectedAnswers] = useState([]) // Stores the selected answers
+  const [finalAnswersArray, setFinalAnswersArray] = useState([]) // Helps us with the endMessage, the spelling of "answers" and toggling react-confetti
+  const [isSubmitted, setIsSubmitted] = useState(false) // Helps with conditional rendering of questions / answers
+  const [areAnswersComplete, setAreAnswersComplete] = useState(false) // Helps with validation
 
   // Initialize the selectedAnswers array with null values for each question
-  useEffect(() => {
-    setSelectedAnswers(Array.from({length: apiData.length}))
-  }, [apiData])
+  // useEffect(() => {
+  //   setSelectedAnswers(Array.from({length: apiData.length}))
+  // }, [apiData])
 
-  
+  console.log(selectedAnswers)
   // Checks if all questions have been answered
   useEffect(() => {
     setAreAnswersComplete(selectedAnswers.every(answer => answer !== undefined))
   }, [selectedAnswers])
 
-
+  // When user clicks "Check Answers"
   function handleSubmit() {
     const finalAnswersArray = selectedAnswers.map((userAnswer, index) => {
       const correctAnswer = apiData[index].correct_answer
@@ -32,6 +32,7 @@ export default function QuizPage( {apiData, handleChange} ) {
     setIsSubmitted(prev => !prev)
   }  
 
+  // When user clicks on an answer
   function handleAnswerClick(answer, questionIndex) {
     setSelectedAnswers(prevAnswers => {
       const updatedAnswers = [...prevAnswers]
@@ -44,10 +45,10 @@ export default function QuizPage( {apiData, handleChange} ) {
   const correctAnswersCount = finalAnswersArray.reduce((count, answerObj) => {
     return answerObj.isUserCorrect ? count + 1 : count
   }, 0)
-
   const endMessage = `You have ${correctAnswersCount}/${apiData.length} correct ${correctAnswersCount === 1 ? "answer" : "answers"}.`
   const onlyCorrectAnswers = correctAnswersCount === apiData.length
 
+  // JSX for question elements
   const questionElements = apiData.map((question, questionIndex) => {
     return (
       <article key={uuidv4()}>
@@ -72,6 +73,7 @@ export default function QuizPage( {apiData, handleChange} ) {
     )
   })
 
+  // JSX for answer elements
   const answerElements = apiData.map((question, questionIndex) => {
     return (
       <article key={uuidv4()}>
@@ -113,7 +115,7 @@ export default function QuizPage( {apiData, handleChange} ) {
           {answerElements}
           <div className="flex gap1">
             <p>{endMessage}</p>
-            <button className="btn btn-primary align-self" onClick={handleChange}>NEW GAME</button>
+            <button className="btn btn-primary align-self" onClick={handleStart}>NEW GAME</button>
           </div>
         </section>
       ) : (

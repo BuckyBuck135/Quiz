@@ -15,6 +15,7 @@
 
   --foreground: var(--clr-dark);
   --background: var(--clr-light);
+  --bg-neutral: #D6DBF5;
 
   --ff-primary: 'Karla', sans-serif;;
   --ff-secondary: 'Inter Tight', sans-serif
