@@ -1,7 +1,31 @@
 h1 {
     font-family: var(--ff-secondary);
-    font-size: 2rem;
+    font-size: clamp(2rem, 12vmin, 5rem);
+    --bg-size: 400%;
+    background: linear-gradient(
+                60deg,
+                var(--background),
+                var(--clr-correct),
+                var(--clr-incorrect),
+                var(--background)
+              ) 0 0 / var(--bg-size) 100%;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
 }
+
+@media (prefers-reduced-motion: no-preference) {
+    h1 {
+        animation: move-bg 15s 5s infinite linear;
+    }
+
+    @keyframes move-bg {
+        to {
+          background-position: var(--bg-size) 0;
+        }
+    }
+}
+
 
 form > *:not(:last-child) {
     margin-bottom: 1.5em;

@@ -12,13 +12,17 @@
   --clr-primary: #dbffa2;
   --clr-secondary: #D6DBF5;
   --clr-accent: #f79595;
-
+  --clr-correct: #176f2a;
+  --clr-incorrect: #d03a1b;
+  
   --foreground: var(--clr-dark);
   --background: var(--clr-light);
   --bg-neutral: #D6DBF5;
 
   --ff-primary: 'Karla', sans-serif;;
-  --ff-secondary: 'Inter Tight', sans-serif
+  --ff-secondary: 'Inter Tight', sans-serif;
+
+  
 }
 
 /* not implemented yet */

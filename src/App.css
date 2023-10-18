@@ -94,8 +94,9 @@ button {
 }
 
 @media screen and (width > 690px) {
+
   main {
-    padding: 2em;
+    padding: 4em;
   }
 
   .btn-primary {
