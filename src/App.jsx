@@ -37,36 +37,40 @@ export default function App() {
     fetchCategories()
   },[])
 
-  // fetches questions from the API based on queries managed by startPage
+  // calls fetchData() with a setTimeout debouncing to avoid too many requests caused by the number of questions range input
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let url = `https://opentdb.com/api.php?amount=${formData.amount}&difficulty=${formData.difficulty}`
-        if (formData.category !== "") {
-          url += `&category=${formData.category}`
-        }
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('Could not reach the API')
-        }
-  
-        const data = await response.json()
-        const shuffledData = data.results.map(question => {
-          const shuffledAnswers = [question.correct_answer, ...question.incorrect_answers].sort(() => 0.5 - Math.random())
-          // we keep the api data with spread, and add the shuffled answers
-          return {
-            ...question,
-            answers: shuffledAnswers
-          }
-        })
-        setApiData(shuffledData)
-      } catch (error) {
-        console.error('An error occurred while processing data:', error)
-      }
-    }
-  
-    fetchData()
+    const timeoutId = setTimeout(() => {
+      fetchData()
+    }, 500)
+    return () => clearTimeout(timeoutId)
   }, [formData])
+
+  // fetches questions from the API based on queries managed by startPage
+  async function fetchData() {
+    try {
+      let url = `https://opentdb.com/api.php?amount=${formData.amount}&difficulty=${formData.difficulty}`
+      if (formData.category !== "") {
+        url += `&category=${formData.category}`
+      }
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Could not reach the API')
+      }
+
+      const data = await response.json()
+      const shuffledData = data.results.map(question => {
+        const shuffledAnswers = [question.correct_answer, ...question.incorrect_answers].sort(() => 0.5 - Math.random())
+        // we keep the api data with spread, and add the shuffled answers
+        return {
+          ...question,
+          answers: shuffledAnswers
+        }
+      })
+      setApiData(shuffledData)
+    } catch (error) {
+      console.error('An error occurred while processing data:', error)
+    }
+  }
 
   // Callback function to manage StartPage's form and update state
   function handleFormDataChange(newData) {
