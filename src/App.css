@@ -120,6 +120,12 @@ button {
 
 /* BLOBS */
 .shape-blob {
+  display: none
+}
+
+@media (prefers-reduced-motion: no-preference) {
+.shape-blob {
+  display: block;
 	background: var(--clr-accent);
 	height: 200px;
 	width: 200px;
@@ -175,7 +181,7 @@ button {
   500% { transform: none; }
    50% { transform: translate(50%, 20%) rotate(-200deg) scale(1.2);}
 }
-
+}
 @media screen and (width > 690px) {
 
   main {
