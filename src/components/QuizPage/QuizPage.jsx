@@ -51,7 +51,7 @@ export default function QuizPage( {apiData, handleStart} ) {
   const questionElements = apiData.map((question, questionIndex) => {
     return (
       <article key={uuidv4()}>
-        <h3>{decode(question.question)}</h3>
+        <h3><span>{questionIndex+1}. </span>{decode(question.question)}</h3>
         <ul>
             {question.answers.map(answer => {
                 const isSelected = selectedAnswers[questionIndex] == answer 
@@ -76,7 +76,7 @@ export default function QuizPage( {apiData, handleStart} ) {
   const answerElements = apiData.map((question, questionIndex) => {
     return (
       <article key={uuidv4()}>
-        <h3>{decode(question.question)}</h3>
+        <h3><span>{questionIndex+1}. </span>{decode(question.question)}</h3>
         <ul>
             {question.answers.map(answer => {
               const isSelected = selectedAnswers[questionIndex] === answer
