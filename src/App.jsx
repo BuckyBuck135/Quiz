@@ -38,12 +38,12 @@ export default function App() {
   },[])
 
   // calls fetchData() with a setTimeout debouncing to avoid too many requests caused by the number of questions range input
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      fetchData()
-    }, 500)
-    return () => clearTimeout(timeoutId)
-  }, [formData])
+  // useEffect(() => {
+  //   const timeoutId = setTimeout(() => {
+  //     fetchData()
+  //   }, 500)
+  //   return () => clearTimeout(timeoutId)
+  // }, [formData])
 
   // fetches questions from the API based on queries managed by startPage
   async function fetchData() {
@@ -70,6 +70,13 @@ export default function App() {
     } catch (error) {
       console.error('An error occurred while processing data:', error)
     }
+  }
+
+
+  function handleStart() {
+    setStartScreen(prev => !prev)
+    // makes sure we get a fresh API fetch every game
+    fetchData()
   }
 
   // Callback function to manage StartPage's form and update state
@@ -115,7 +122,7 @@ export default function App() {
           <StartPage 
             apiData={apiData}
             categoriesList={categoriesList}
-            handleStart={()=> setStartScreen(prev => !prev)}  
+            handleStart={handleStart}
             formData={formData}
             handleFormDataChange={handleFormDataChange}
           />
