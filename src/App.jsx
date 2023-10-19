@@ -1,11 +1,13 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import * as ReactDOM from 'react-dom';
+import { DarkModeSwitch } from 'react-toggle-dark-mode'
 import StartPage from './components/StartPage/StartPage'
 import QuizPage from './components/QuizPage/QuizPage'
-// import DarkModeToggleButton from "./components/DarkModeToggleButton/DarkModeToggleButton"
 import "./App.css"
 
 export default function App() {
+  const [isDarkMode, setDarkMode] = React.useState(false);
   const [apiData, setApiData] = useState([]) // Stores API data
   const [startScreen, setStartScreen] = useState(true) // Conditionally renders the startPage
   const [categoriesList, setCategoriesList] = useState([]) // Stores the list of trivia categories
@@ -13,7 +15,7 @@ export default function App() {
     category: "",
     difficulty: "easy",
     amount: "5"
-  }) // Stores user preferences
+  }) // Stores quiz settings
 
 
   // fetches the list of categories from the API, which is sent to startPage 
@@ -66,30 +68,62 @@ export default function App() {
     fetchData()
   }, [formData])
 
-    // Callback function to manage StartPage's form and update state
-    function handleFormDataChange(newData) {
-      console.log(newData)
-      setFormData(newData)
+  // Callback function to manage StartPage's form and update state
+  function handleFormDataChange(newData) {
+    setFormData(newData)
+  }
+
+  // Managin darkmode - sets stored mode on load
+  useEffect(() => {
+    const storedDarkMode = localStorage.getItem('darkMode');
+    if (storedDarkMode === 'enabled') {
+      setDarkMode(true);
     }
+  }, []);
+
+  function toggleDarkMode(checked) {
+    if (isDarkMode) {
+      setDarkMode(checked)
+      localStorage.setItem('darkMode', null);
+    } else {
+      setDarkMode(checked)
+      localStorage.setItem('darkMode', 'enabled');
+    }
+  }
 
   return (
-    <main>    
-      {/* <DarkModeToggleButton /> */}
-      {startScreen ?
-        <StartPage 
-          apiData={apiData}
-          categoriesList={categoriesList}
-          handleStart={()=> setStartScreen(prev => !prev)}  
-          formData={formData}
-          handleFormDataChange={handleFormDataChange}
+    <>
+      <div className={`container ${isDarkMode ? "darkmode" : ""}`}>
+      <div className="shape-blob"></div>
+      <div className="shape-blob one"></div>
+      <div className="shape-blob two"></div>
+      <main>    
+        <DarkModeSwitch
+          className="dark-mode-switch"
+          aria-label="dark-mode-switch"
+          checked={isDarkMode}
+          onChange={toggleDarkMode}
+          size={30}
+          moonColor="var(--foreground)"
+          sunColor="var(--foreground)"
         />
-      :
-        <QuizPage
-          apiData={apiData}
-          handleStart={()=> setStartScreen(prev => !prev)}
-        />
-      }
-    </main>
+        {startScreen ?
+          <StartPage 
+            apiData={apiData}
+            categoriesList={categoriesList}
+            handleStart={()=> setStartScreen(prev => !prev)}  
+            formData={formData}
+            handleFormDataChange={handleFormDataChange}
+          />
+        :
+          <QuizPage
+            apiData={apiData}
+            handleStart={()=> setStartScreen(prev => !prev)}
+          />
+        }
+      </main>
+      </div>
+    </>
   )
 }
 
