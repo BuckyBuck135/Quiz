@@ -16,7 +16,6 @@ export default function QuizPage( {apiData, handleStart} ) {
     setSelectedAnswers(Array.from({length: apiData.length}))
   }, [apiData])
 
-  console.log(selectedAnswers)
   // Checks if all questions have been answered
   useEffect(() => {
     setAreAnswersComplete(selectedAnswers.every(answer => answer !== undefined))
