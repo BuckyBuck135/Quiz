@@ -86,6 +86,8 @@ button {
   right: 25px;
 }
 
+/* UTILITY */
+
 .flex {
   display: flex;
   align-items: center;
