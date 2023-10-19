@@ -11,10 +11,10 @@ export default function QuizPage( {apiData, handleStart} ) {
   const [isSubmitted, setIsSubmitted] = useState(false) // Helps with conditional rendering of questions / answers
   const [areAnswersComplete, setAreAnswersComplete] = useState(false) // Helps with validation
 
-  // Initialize the selectedAnswers array with null values for each question
-  // useEffect(() => {
-  //   setSelectedAnswers(Array.from({length: apiData.length}))
-  // }, [apiData])
+  // Initialize the selectedAnswers array with null values for each question; helps with validation.
+  useEffect(() => {
+    setSelectedAnswers(Array.from({length: apiData.length}))
+  }, [apiData])
 
   console.log(selectedAnswers)
   // Checks if all questions have been answered
