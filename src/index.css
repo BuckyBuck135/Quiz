@@ -8,29 +8,30 @@
 
 :root {
   --clr-light: #fff8dc;
-  --clr-dark: #0B2434;
+  --clr-dark: #3b3b3b;
+
   --clr-primary: #dbffa2;
-  --clr-secondary: #D6DBF5;
+  --clr-secondary: #c3fcf2;
   --clr-accent: #f79595;
-  --clr-correct: #176f2a;
-  --clr-incorrect: #d03a1b;
-  
+
   --foreground: var(--clr-dark);
   --background: var(--clr-light);
-  --bg-neutral: #D6DBF5;
+
+  --button-face: #6b6b6b;
+  --button-color: #fff;
+  --bg-selected: #D6DBF5;
 
   --ff-primary: 'Karla', sans-serif;;
   --ff-secondary: 'Inter Tight', sans-serif;
-
-  
+  --clr-correct: #176f2a;
+  --clr-incorrect: #d03a1b;  
 }
 
-/* not implemented yet */
 .darkmode {
   --clr-light: #fff8dc;
-  --clr-dark: #0B2434;
-  --clr-primary: #202302;
-  --clr-secondary: #00100d;
+  --clr-dark: #121b16;
+  --clr-primary: #1d2d1a;
+  --clr-secondary: #01230a;
   --clr-accent: #f79595;
 
   --foreground: var(--clr-light);
@@ -38,9 +39,9 @@
 }
 
 /* Overriding the user agent styles with our own */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
-    --foreground: var(--clr-light);
-    --background: var(--clr-dark);
+    --background: var(--clr-light);
+    --foreground: var(--clr-dark);
   }
-}
+} */
