@@ -37,11 +37,3 @@
   --foreground: var(--clr-light);
   --background: var(--clr-dark);
 }
-
-/* Overriding the user agent styles with our own */
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--clr-light);
-    --foreground: var(--clr-dark);
-  }
-} */
