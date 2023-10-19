@@ -1,5 +1,4 @@
 import React from "react"
-import { useState, useEffect } from 'react'
 import "./StartPage.css"
 
 export default function StartPage( {categoriesList, handleStart, formData, handleFormDataChange } ) {
@@ -16,7 +15,7 @@ export default function StartPage( {categoriesList, handleStart, formData, handl
 
   return (
       <section className="start-section flex column gap2 ">
-        <h1>QUIZZICAL</h1>
+        <h1>QUI<span className="clr-correct">Z</span><span className="clr-incorrect">Z</span>ICAL</h1>
         <form>
           <fieldset>
             <legend>CATEGORY</legend>
@@ -51,15 +50,3 @@ export default function StartPage( {categoriesList, handleStart, formData, handl
       </section>
   )
 }
-
-  // const datalist_options = categoriesList.map(category => (
-  //   <option key={category.id} value={category.id}>{category.name}</option>
-  // ))
-
-              {/* <input list="options" />
-            <datalist id="options">
-              {datalist_options}
-            </datalist> */}
-
-
-// {id: 17, name: 'Science & Nature'}
