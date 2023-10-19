@@ -23,6 +23,8 @@ ul {
             padding: 0.25em 0.5em;
             border: none;
             cursor: pointer;
+            background-color: var(--button-face);
+            color: var(--button-color)
         }
     }
 }
@@ -32,14 +34,14 @@ ul {
 }
 
 .isSelected {
-    background-color:var(--bg-neutral);
+    background-color: var(--bg-selected);
     color: var(--clr-dark);
-    outline: 2px solid var(--bg-neutral);
+    outline: 2px solid var(--foreground);
     outline-offset: 2px;
 }
 
 .isCorrectGuess {
-    background-color:var(--bg-neutral);
+    background-color:var(--bg-selected);
     color:var(--clr-dark);
         outline: 3px solid var(--clr-correct);
     animation: scale 0.5s ease-in-out;
@@ -53,7 +55,7 @@ ul {
 }
 
 .isIncorrectGuess {
-    background-color:var(--bg-neutral);
+    background-color:var(--bg-selected);
     color:var(--clr-dark);
     outline: 3px solid var(--clr-incorrect);
     animation: horizontal-shaking 0.3s ease-in-out;
@@ -68,7 +70,7 @@ ul {
 }
 
 .isCorrectAnswer{
-    background-color: var(--bg-neutral);
+    background-color: var(--bg-selected);
     color:var(--clr-dark);
     outline: 3px solid var(--clr-correct);
     &::before {
